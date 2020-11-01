@@ -1,6 +1,7 @@
 <template>
   <div class="infoWrapp">
-    <p>{{ info.name }}, {{ this.info.nativeName }}</p>
+    <p v-if="info.name === info.nativeName">{{ info.name }}</p>
+    <p v-else>{{ info.name }}, {{ info.nativeName }}</p>
     <p>{{ info.subregion }}</p>
     <div class="section">
       <div>Area: {{ info.area }} km&sup2;;</div>
