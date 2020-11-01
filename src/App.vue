@@ -43,6 +43,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: rgb(243, 243, 243);
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
