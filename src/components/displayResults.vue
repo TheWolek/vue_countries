@@ -1,6 +1,14 @@
 <template>
   <div class="results">
+    <div v-if="errorMsg != '' && countryPhotos.length === 0">
+      nothing was found, please try again
+    </div>
+    <div v-else-if="errorMsg != ''">
+      {{ errorMsg }}
+    </div>
+    <div v-else>Results for {{ searchText }}:</div>
     <infoComp v-if="infoReady" :info="countryDetail" />
+
     <div class="resultsImgs">
       {{ query }}
       <imgComp
@@ -29,11 +37,14 @@ export default {
     return {
       countryDetail: {},
       countryPhotos: [],
-      infoReady: false
+      infoReady: false,
+      errorMsg: ""
     };
   },
   computed: {
     query() {
+      this.infoReady = false;
+      this.errorMsg = "";
       fetch(`https://restcountries-v1.p.rapidapi.com/name/${this.searchText}`, {
         method: "GET",
         headers: {
@@ -43,16 +54,22 @@ export default {
       })
         .then(response => response.json())
         .then(response => {
-          console.log(response[0]);
+          console.log(response);
+          if (response.status === 404) {
+            throw new Error(
+              `Only pictures for the ${this.searchText} term were found:`
+            );
+          }
           this.countryDetail = response[0];
           this.infoReady = true;
         })
         .catch(err => {
           console.log(err);
+          this.errorMsg = err.message;
         });
 
       fetch(
-        `https://pixabay.com/api/?key=18929159-7903855673a1b0ee32e462f41&q=${this.searchText}&category=nature&per_page=10&image_type=photo`,
+        `https://pixabay.com/api/?key=18929159-7903855673a1b0ee32e462f41&q=${this.searchText}&category=nature&per_page=20&image_type=photo`,
         {
           method: "GET"
         }
