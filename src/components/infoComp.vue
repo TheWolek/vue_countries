@@ -9,7 +9,7 @@
     </div>
     <div class="section">
       <div>Capital {{ info.capital }}</div>
-      <div>
+      <div class="currencies">
         Currencies:
         <span v-for="cur in info.currencies" :key="cur">{{ cur }}</span>
       </div>
@@ -65,6 +65,12 @@ export default {
 
     div + div {
       margin-left: 10px;
+    }
+
+    .currencies {
+      span + span {
+        margin-left: 5px;
+      }
     }
   }
 
