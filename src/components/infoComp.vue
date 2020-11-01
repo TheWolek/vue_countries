@@ -4,7 +4,7 @@
     <p>{{ info.subregion }}</p>
     <div class="section">
       <div>Area: {{ info.area }} km&sup2;;</div>
-      <div>Population: {{ info.population }}</div>
+      <div>Population: {{ devidePopulation }}</div>
     </div>
     <div class="section">
       <div>Capital {{ info.capital }}</div>
@@ -27,7 +27,23 @@ export default {
       population: ""
     };
   },
-  computed: {}
+  computed: {
+    devidePopulation() {
+      let old = this.info.population + "";
+      let output = "";
+      let counter = 0;
+      for (let i = old.length - 1; i >= 0; i--) {
+        if (counter == 3) {
+          output = old[i] + " " + output;
+          counter = 0;
+        } else {
+          output = old[i] + output;
+        }
+        counter++;
+      }
+      return output;
+    }
+  }
 };
 </script>
 
