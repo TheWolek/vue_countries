@@ -60,7 +60,7 @@ body {
 
 .slideUp-enter,
 .slideUp-leave-to {
-  transform: translateY(-150px);
+  transform: translateY(-60vh);
 }
 
 .sildeDown-enter-active,
