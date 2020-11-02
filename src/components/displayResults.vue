@@ -52,14 +52,18 @@ export default {
           "x-rapidapi-key": "5ef2a4c054mshb06cd533d70f5cbp1ef2fajsnbcc298d14203"
         }
       })
-        .then(response => response.json())
         .then(response => {
-          console.log(response);
           if (response.status === 404) {
+            this.infoReady = false;
             throw new Error(
               `Only pictures for the ${this.searchText} term were found:`
             );
+          } else {
           }
+          response.json();
+        })
+        .then(response => {
+          console.log(response);
           this.countryDetail = response[0];
           this.infoReady = true;
         })
