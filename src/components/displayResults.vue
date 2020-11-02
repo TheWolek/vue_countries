@@ -59,11 +59,11 @@ export default {
               `Only pictures for the ${this.searchText} term were found:`
             );
           } else {
+            return response.json();
           }
-          response.json();
         })
         .then(response => {
-          console.log(response);
+          //console.log("res: ", response);
           this.countryDetail = response[0];
           this.infoReady = true;
         })
@@ -80,7 +80,7 @@ export default {
       )
         .then(response => response.json())
         .then(response => {
-          console.log(response);
+          //console.log(response);
           this.countryPhotos = response.hits;
         })
         .catch(err => {

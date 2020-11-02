@@ -32,7 +32,7 @@ export default {
     onSearch(e) {
       this.SearchFieldOutput = e;
       this.searching = true;
-      console.log(this.SearchFieldOutput);
+      //console.log(this.SearchFieldOutput);
     }
   }
 };

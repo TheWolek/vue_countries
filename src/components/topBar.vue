@@ -4,6 +4,11 @@
     <div class="topBarSearchWrapp">
       <input type="text" v-model="searchText" />
       <input type="button" value="Search" v-on:click="onSearch" />
+      <transition name="fade">
+        <div v-if="errorMsg != '' && searchText === ''" class="inputError">
+          {{ errorMsg }}
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -13,12 +18,18 @@ export default {
   name: "topBar",
   data() {
     return {
-      searchText: ""
+      searchText: "",
+      errorMsg: ""
     };
   },
   methods: {
     onSearch() {
-      this.$emit("searching", this.searchText);
+      if (this.searchText === "") {
+        this.errorMsg = "field is required";
+      } else {
+        this.errorMsg = "";
+        this.$emit("searching", this.searchText);
+      }
     }
   }
 };
@@ -41,6 +52,24 @@ $ctaBg-active: rgb(106, 226, 160);
 
   h2 {
     font-size: 25px;
+  }
+
+  .inputError {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 515px;
+    top: 60px;
+    width: 120px;
+    height: 20px;
+    background: rgb(214, 88, 88);
+    border-radius: 5px;
+    border: 2px solid rgb(221, 30, 30);
+    font-size: 0.85em;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+    color: rgb(36, 36, 36);
   }
   .topBarSearchWrapp {
     input[type="text"] {
@@ -82,5 +111,15 @@ $ctaBg-active: rgb(106, 226, 160);
       margin-left: 15px;
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.6s ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
