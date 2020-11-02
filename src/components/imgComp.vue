@@ -1,6 +1,6 @@
 <template>
   <div class="imgTile">
-    <div class="img" :style="style"></div>
+    <div class="img" :style="style" v-on:click="onImgClick"></div>
   </div>
 </template>
 
@@ -12,6 +12,11 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    onImgClick() {
+      console.log("click");
+    }
   },
   computed: {
     style() {

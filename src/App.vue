@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <modal v-if="modalOn"></modal>
     <transition name="sildeDown">
       <topBar v-if="searching" v-on:searching="onSearch" />
     </transition>
@@ -14,25 +15,31 @@
 import topBar from "./components/topBar";
 import search from "./components/search";
 import displayResults from "./components/displayResults";
+import modal from "./components/modal";
 
 export default {
   name: "App",
   data() {
     return {
       SearchFieldOutput: "",
-      searching: false
+      searching: false,
+      modalOn: false
     };
   },
   components: {
     search,
     topBar,
-    displayResults
+    displayResults,
+    modal
   },
   methods: {
     onSearch(e) {
       this.SearchFieldOutput = e;
       this.searching = true;
       //console.log(this.SearchFieldOutput);
+    },
+    onModalOpen(e) {
+      this.modalOn = true;
     }
   }
 };
