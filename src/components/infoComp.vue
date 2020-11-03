@@ -8,7 +8,7 @@
       <div>Population: {{ devidePopulation }}</div>
     </div>
     <div class="section">
-      <div>Capital {{ info.capital }}</div>
+      <div>Capital: {{ info.capital }}</div>
       <div class="currencies">
         Currencies:
         <span v-for="cur in info.currencies" :key="cur">{{ cur }}</span>
