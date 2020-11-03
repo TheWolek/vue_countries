@@ -1,12 +1,23 @@
 <template>
   <div id="app">
+    <transition name="fade">
+      <modal
+        v-if="modalOn"
+        :modalImgObject="modalImgObject"
+        v-on:closeModal="onModalClose"
+      ></modal>
+    </transition>
     <transition name="sildeDown">
       <topBar v-if="searching" v-on:searching="onSearch" />
     </transition>
     <transition name="slideUp">
       <search v-if="!searching" v-on:searching="onSearch" />
     </transition>
-    <displayResults v-if="searching" v-bind:searchText="SearchFieldOutput" />
+    <displayResults
+      v-if="searching"
+      v-bind:searchText="SearchFieldOutput"
+      v-on:imgClicked="onImgClick"
+    />
   </div>
 </template>
 
@@ -14,25 +25,39 @@
 import topBar from "./components/topBar";
 import search from "./components/search";
 import displayResults from "./components/displayResults";
+import modal from "./components/modal";
 
 export default {
   name: "App",
   data() {
     return {
       SearchFieldOutput: "",
-      searching: false
+      searching: false,
+      modalOn: false,
+      modalImgObject: {}
     };
   },
   components: {
     search,
     topBar,
-    displayResults
+    displayResults,
+    modal
   },
   methods: {
     onSearch(e) {
       this.SearchFieldOutput = e;
       this.searching = true;
       //console.log(this.SearchFieldOutput);
+    },
+    onModalOpen(e) {
+      this.modalOn = true;
+      this.modalImgObject = e;
+    },
+    onImgClick(e) {
+      this.onModalOpen(e);
+    },
+    onModalClose() {
+      this.modalOn = false;
     }
   }
 };
@@ -73,5 +98,15 @@ body {
 .sildeDown-leave-top {
   transform: translateY(-100px);
   opacity: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s ease;
+}
+
+.fade-enter,
+.fade-leave-top {
+  opacity: 0;
 }
 </style>
