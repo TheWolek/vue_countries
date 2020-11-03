@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <transition name="fade">
-      <modal v-if="modalOn" v-on:closeModal="onModalClose"></modal>
+      <modal
+        v-if="modalOn"
+        :modalImg="modalImg"
+        v-on:closeModal="onModalClose"
+      ></modal>
     </transition>
     <transition name="sildeDown">
       <topBar v-if="searching" v-on:searching="onSearch" />
@@ -47,6 +51,7 @@ export default {
     },
     onModalOpen(e) {
       this.modalOn = true;
+      this.modalImg = e;
       console.log(e);
     },
     onImgClick(e) {

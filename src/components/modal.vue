@@ -2,6 +2,7 @@
   <div class="modalBackground">
     <div class="modalWrapp">
       <div class="close" v-on:click="onModalClose"></div>
+      <div class="imgContainer" :style="style"></div>
     </div>
   </div>
 </template>
@@ -9,6 +10,9 @@
 <script>
 export default {
   name: "modal",
+  props: {
+    modalImg: String
+  },
   data() {
     return {};
   },
@@ -16,6 +20,11 @@ export default {
     onModalClose() {
       this.$emit("closeModal");
       console.log("close");
+    }
+  },
+  computed: {
+    style() {
+      return `background: url(${this.modalImg})`;
     }
   }
 };
@@ -41,6 +50,17 @@ export default {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     transition: all 0.3s ease;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1.3em;
+
+    .imgContainer {
+      width: 80%;
+      height: 90%;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
 
     .close {
       position: absolute;

@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     onImgClick(e) {
-      //console.log(e);
       this.$emit("imgClicked", e);
     }
   },
