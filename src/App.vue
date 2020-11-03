@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <modal v-if="modalOn"></modal>
+    <transition name="fade">
+      <modal v-if="modalOn" v-on:closeModal="onModalClose"></modal>
+    </transition>
     <transition name="sildeDown">
       <topBar v-if="searching" v-on:searching="onSearch" />
     </transition>
@@ -49,6 +51,9 @@ export default {
     },
     onImgClick(e) {
       this.onModalOpen(e);
+    },
+    onModalClose() {
+      this.modalOn = false;
     }
   }
 };
@@ -89,5 +94,15 @@ body {
 .sildeDown-leave-top {
   transform: translateY(-100px);
   opacity: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s ease;
+}
+
+.fade-enter,
+.fade-leave-top {
+  opacity: 0;
 }
 </style>
