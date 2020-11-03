@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     onImgClick() {
-      console.log("click");
+      this.$emit("imgClicked", this.imgSrc);
     }
   },
   computed: {

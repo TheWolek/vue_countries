@@ -7,7 +7,11 @@
     <transition name="slideUp">
       <search v-if="!searching" v-on:searching="onSearch" />
     </transition>
-    <displayResults v-if="searching" v-bind:searchText="SearchFieldOutput" />
+    <displayResults
+      v-if="searching"
+      v-bind:searchText="SearchFieldOutput"
+      v-on:imgClicked="onImgClick"
+    />
   </div>
 </template>
 
@@ -23,7 +27,8 @@ export default {
     return {
       SearchFieldOutput: "",
       searching: false,
-      modalOn: false
+      modalOn: false,
+      modalImg: ""
     };
   },
   components: {
@@ -40,6 +45,10 @@ export default {
     },
     onModalOpen(e) {
       this.modalOn = true;
+      console.log(e);
+    },
+    onImgClick(e) {
+      this.onModalOpen(e);
     }
   }
 };

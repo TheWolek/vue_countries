@@ -15,6 +15,7 @@
         v-for="photo in countryPhotos"
         :img-src="photo.largeImageURL"
         :key="photo.id"
+        v-on:imgClicked="onImgClick"
       />
     </div>
   </div>
@@ -40,6 +41,12 @@ export default {
       infoReady: false,
       errorMsg: ""
     };
+  },
+  methods: {
+    onImgClick(e) {
+      //console.log(e);
+      this.$emit("imgClicked", e);
+    }
   },
   computed: {
     query() {

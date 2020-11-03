@@ -1,6 +1,8 @@
 <template>
   <div class="modalBackground">
-    <div class="modalWrapp"></div>
+    <div class="modalWrapp">
+      <div class="close"></div>
+    </div>
   </div>
 </template>
 
@@ -21,6 +23,7 @@ export default {
   width: 100%;
   height: 100vh;
   background: rgba(192, 192, 192, 0.384);
+
   .modalWrapp {
     position: fixed;
     top: 50%;
@@ -31,6 +34,14 @@ export default {
     background: rgb(247, 247, 247);
     transform: translate(-50%, -50%);
     border-radius: 10px;
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 50px;
+      height: 50px;
+    }
   }
 }
 </style>
