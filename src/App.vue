@@ -3,7 +3,7 @@
     <transition name="fade">
       <modal
         v-if="modalOn"
-        :modalImg="modalImg"
+        :modalImgObject="modalImgObject"
         v-on:closeModal="onModalClose"
       ></modal>
     </transition>
@@ -34,7 +34,7 @@ export default {
       SearchFieldOutput: "",
       searching: false,
       modalOn: false,
-      modalImg: ""
+      modalImgObject: {}
     };
   },
   components: {
@@ -51,8 +51,7 @@ export default {
     },
     onModalOpen(e) {
       this.modalOn = true;
-      this.modalImg = e;
-      console.log(e);
+      this.modalImgObject = e;
     },
     onImgClick(e) {
       this.onModalOpen(e);

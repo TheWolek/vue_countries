@@ -8,14 +8,26 @@
 export default {
   name: "comp-img",
   props: {
-    imgSrc: String
+    imgSrc: String,
+    id: Number,
+    imgAuthor: String,
+    imgTags: String,
+    imgPage: String
   },
   data() {
-    return {};
+    return {
+      imgObject: {
+        imgSrc: this.imgSrc,
+        id: this.id,
+        author: this.imgAuthor,
+        tags: this.imgTags,
+        page: this.imgPage
+      }
+    };
   },
   methods: {
     onImgClick() {
-      this.$emit("imgClicked", this.imgSrc);
+      this.$emit("imgClicked", this.imgObject);
     }
   },
   computed: {

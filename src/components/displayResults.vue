@@ -14,6 +14,9 @@
       <imgComp
         v-for="photo in countryPhotos"
         :img-src="photo.largeImageURL"
+        :img-author="photo.user"
+        :img-tags="photo.tags"
+        :img-page="photo.pageURL"
         :key="photo.id"
         v-on:imgClicked="onImgClick"
       />
@@ -86,7 +89,7 @@ export default {
       )
         .then(response => response.json())
         .then(response => {
-          //console.log(response);
+          console.log(response);
           this.countryPhotos = response.hits;
         })
         .catch(err => {

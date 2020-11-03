@@ -3,6 +3,11 @@
     <div class="modalWrapp">
       <div class="close" v-on:click="onModalClose"></div>
       <div class="imgContainer" :style="style"></div>
+      <div class="details">
+        <p>Author: {{ author }}</p>
+        <p>Tags: {{ tags }}</p>
+        <p><a :href="page" target="_blank">Pixabay</a></p>
+      </div>
     </div>
   </div>
 </template>
@@ -11,10 +16,15 @@
 export default {
   name: "modal",
   props: {
-    modalImg: String
+    modalImgObject: Object
   },
   data() {
-    return {};
+    return {
+      src: this.modalImgObject.imgSrc,
+      author: this.modalImgObject.author,
+      tags: this.modalImgObject.tags,
+      page: this.modalImgObject.page
+    };
   },
   methods: {
     onModalClose() {
@@ -24,7 +34,7 @@ export default {
   },
   computed: {
     style() {
-      return `background: url(${this.modalImg})`;
+      return `background-image: url(${this.src})`;
     }
   }
 };
@@ -56,10 +66,31 @@ export default {
     padding-left: 1.3em;
 
     .imgContainer {
-      width: 80%;
+      width: 75%;
       height: 90%;
       background-repeat: no-repeat;
       background-size: cover;
+      border-radius: 5px;
+    }
+
+    .details {
+      align-self: flex-start;
+      margin-top: 4em;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.1rem;
+
+      a,
+      a:visited {
+        color: inherit;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          color: #000;
+        }
+      }
     }
 
     .close {
