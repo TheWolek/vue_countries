@@ -54,6 +54,9 @@ export default {
     query() {
       this.infoReady = false;
       this.errorMsg = "";
+      let page = Math.floor(Math.random() * 10);
+      page <= 0 ? (page += 1) : page;
+
       fetch(`https://restcountries-v1.p.rapidapi.com/name/${this.searchText}`, {
         method: "GET",
         headers: {
@@ -82,7 +85,7 @@ export default {
         });
 
       fetch(
-        `https://pixabay.com/api/?key=18929159-7903855673a1b0ee32e462f41&q=${this.searchText}&category=nature&per_page=20&image_type=photo`,
+        `https://pixabay.com/api/?key=18929159-7903855673a1b0ee32e462f41&q=${this.searchText}&page=${page}&category=nature&per_page=20&image_type=photo`,
         {
           method: "GET"
         }
