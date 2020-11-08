@@ -1,7 +1,7 @@
 <template>
   <div class="topBar">
     <h2>Countries</h2>
-    <div class="topBarSearchWrapp">
+    <form v-on:submit.prevent="onSearch" class="topBarSearchWrapp">
       <input type="text" v-model="searchText" />
       <input type="button" value="Search" v-on:click="onSearch" />
       <transition name="fade">
@@ -9,7 +9,7 @@
           {{ errorMsg }}
         </div>
       </transition>
-    </div>
+    </form>
   </div>
 </template>
 

@@ -1,13 +1,15 @@
 <template>
   <div class="searchWrapp">
     <h2>Countries</h2>
-    <input type="text" v-model="searchText" />
-    <transition name="fade">
-      <div v-if="errorMsg != '' && searchText === ''" class="inputError">
-        {{ errorMsg }}
-      </div>
-    </transition>
-    <input type="button" value="Search" v-on:click="onSearch" />
+    <form v-on:submit.prevent="onSearch">
+      <input type="text" v-model="searchText" />
+      <transition name="fade">
+        <div v-if="errorMsg != '' && searchText === ''" class="inputError">
+          {{ errorMsg }}
+        </div>
+      </transition>
+      <input type="button" value="Search" v-on:click="onSearch" />
+    </form>
   </div>
 </template>
 
@@ -46,6 +48,13 @@ $ctaBg-active: rgb(106, 226, 160);
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
   .inputError {
     position: absolute;
